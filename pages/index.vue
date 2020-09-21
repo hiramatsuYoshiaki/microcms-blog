@@ -12,12 +12,32 @@ div
       div(v-for="post in store.getters['posts/getPosts'].contents" :key="post.id")
         h3 {{ post.title}}
     div.mt-4
+      h1 Stages
+      div(v-for="stage in store.getters['stages/getStages'].contents" :key="stage.id")
+        h3 {{ stage.title}}
+    div.mt-4
+      h1 Users
+      div(v-for="user in store.getters['users/getUsers'].contents" :key="user.id")
+        h3 {{ user.name}}
+    div.mt-4
+      h1 Tags
+      div(v-for="tag in store.getters['tags/getTags'].contents" :key="tag.id")
+        h3 {{ tag.tags}}
+    div.mt-4
       h1 store stete contents
       p {{ store.getters.getLocation}}
     div.mt-4
       h1 posts contents data
       p {{ store.getters['posts/getPosts'].contents}}
-
+    div.mt-4
+      h1 stages contents data
+      p {{ store.getters['stages/getStages'].contents}}
+    div.mt-4
+      h1 users contents data
+      p {{ store.getters['users/getUsers'].contents}}
+    div.mt-4
+      h1 tags contents data
+      p {{ store.getters['tags/getTags'].contents}}
     
 </template>
 <script lang="ts">
@@ -48,9 +68,10 @@ export default defineComponent({
       // store.dispatchでActionを呼び出す
       // setupからstoreを受け取る (※4)
       await store.dispatch('fetchMicrocmsLocations')
-      // await store.dispatch('fetchMicrocmsPosts')
       await store.dispatch('posts/fetchMicrocmsPosts')
-      // this.$store.getters['namespaceName/doneTodos'];
+      await store.dispatch('stages/fetchMicrocmsStages')
+      await store.dispatch('users/fetchMicrocmsUsers')
+      await store.dispatch('tags/fetchMicrocmsTags')
     }
     //methods
     onBeforeMount(async () => {
